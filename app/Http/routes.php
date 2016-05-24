@@ -12,7 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
+});
+
+Route::get('/logout', function () {
+    return view('auth.login');
+});
+
+Route::get('/home',function(){
+   return view('home');
 });
 
 Route::get('/perrito',['uses'=>'perrito@index','as'=>'mona']);

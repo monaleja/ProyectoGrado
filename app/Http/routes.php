@@ -15,11 +15,18 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::post('login', 
+    [
+        'as' =>'login', 
+        'uses' => 'Auth\AuthController@postLogin'
+    ]);
+
+
 Route::get('/logout', function () {
     return view('auth.login');
 });
 
-Route::get('/home',function(){
+Route::get('home',function(){
    return view('home');
 });
 

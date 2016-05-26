@@ -23,6 +23,7 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    protected $username = "usuario_login";
     /**
      * Where to redirect users after login / registration.
      *
@@ -49,10 +50,14 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'usuario' => 'required|max:255',
+            'password' => 'required',
         ]);
+    }
+
+    public function redirectPath()
+    {
+        return route("home");
     }
 
     /**

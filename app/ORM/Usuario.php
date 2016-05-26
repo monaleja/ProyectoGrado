@@ -22,7 +22,7 @@ class Usuario extends Model
     public function crearUsuario(Object $objeto,$edicion){
         $date = Carbon::now();
         $this->tipusu_id(trim($objeto->getTipusuId()));
-        $this->usuario_clave(trim(md5($objeto->getUsuarioClave())));
+        $this->password(trim(md5($objeto->getPassword())));
         $this->usuario_estado(strtoupper(trim($objeto->getUsuarioEstado())));
         $this->rol_id(trim($objeto->getRolId()));
 

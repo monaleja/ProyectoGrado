@@ -29,7 +29,9 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/home';
+
+    protected $redirectAfterLogout = 'login';
 
     /**
      * Create a new authentication controller instance.
@@ -38,7 +40,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware($this->guestMiddleware(), ['except' => 'getLogout']);
     }
 
     /**
@@ -50,7 +52,7 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'usuario' => 'required|max:255',
+            'usuario_login' => 'required|max:255',
             'password' => 'required',
         ]);
     }

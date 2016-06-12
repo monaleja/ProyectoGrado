@@ -11,24 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', [
+    'uses' => 'HomeController@index',
+    'as' => 'home'
+]);
 
-Route::post('login', 
-    [
-        'as' =>'login', 
-        'uses' => 'Auth\AuthController@postLogin'
-    ]);
+/*
+ * Pagina Login
+ */
+Route::get('login', [
+    'uses' => 'Auth\AuthController@getLogin',
+    'as' => 'login'
+]);
 
+Route::post('login','Auth\AuthController@postLogin');
 
-Route::get('/logout', function () {
-    return view('auth.login');
-});
-
-Route::get('home',function(){
-   return view('home');
-});
+Route::get('logout', [
+    'uses' => 'Auth\AuthController@getLogout',
+    'as' => 'logout'
+]);
 
 Route::get('/perrito',['uses'=>'perrito@index','as'=>'mona']);
 

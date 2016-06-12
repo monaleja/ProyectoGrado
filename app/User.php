@@ -9,6 +9,7 @@ class User extends Authenticatable
 
     protected $table = "todo_usuario";
     protected $primaryKey = "usuario_id";
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.

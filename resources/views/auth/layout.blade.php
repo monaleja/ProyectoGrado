@@ -27,8 +27,6 @@
 
         @yield('form')
 
-        @yield('footer')
-
     </div>
 </div>
 </body>

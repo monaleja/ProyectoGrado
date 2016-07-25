@@ -14,6 +14,7 @@ class HomeController extends Controller
     }
     public function index()
     {
-        return view("home");
+        $data = ["titulo"=>"titulo"];
+        return view("home",$data);
     }
 }

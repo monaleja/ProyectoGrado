@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\ORM;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,4 +34,14 @@ class Rol extends Model
     public function eliminarRol(){
         return $this->delete();
     }
+
+    public function getPermiso()
+    {
+        return $this->hasMany('App\ORM\Permiso', 'perfil_id', 'perfil_id');
+    }
+    public function getPerfil()
+    {
+        return $this->belongsTo('App\Perfil', 'perfil_codigo', 'perfil_codigo');
+    }
+
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\ORM;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Usuario extends Model
+class Usuario extends Authenticatable
 {
     protected $table = "todo_usuario";
     protected $primaryKey = "usuario_id";
@@ -43,5 +43,13 @@ class Usuario extends Model
      */
     public function eliminarUsuario(){
         return $this->delete();
+    }
+
+    public function getPersona(){
+        return $this->belongsTo('App\ORM\Persona','persona_id','persona_id');
+    }
+
+    public function getRol(){
+        return $this->belongsTo('App\ORM\Rol','rol_id','rol_id');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\ORM;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,6 +21,7 @@ class Recurso extends Model
     public function crearRecurso(Object $objeto,$edicion){
         $this->recurso_nombre(strtoupper(trim($objeto->getRecursoNombre())));
         $this->recurso_modulo(strtoupper(trim($objeto->getRecursoModulo())));
+        $this->recurso_ruta(strtoupper(trim($objeto->getRecursoRuta())));
         return $this->save();
     }
 

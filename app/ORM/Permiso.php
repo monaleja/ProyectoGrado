@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\ORM;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +9,11 @@ class Permiso extends Model
     protected $table = "todo_permiso";
     protected $primaryKey = "permiso_id";
     public $timestamps = false;
+
+    public function getRecurso()
+    {
+        return $this->hasMany('App\ORM\Recurso', 'recurso_id', 'recurso_id');
+    }
 
     /**
      * @comentario: método para crear o actualizar un registro a partir de un Object y una variable boolean.

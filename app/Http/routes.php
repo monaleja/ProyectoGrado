@@ -16,6 +16,13 @@ Route::get('/', [
     'as' => 'home'
 ]);
 
+/* Modulo Usuario
+ * */
+
+Route::get('/usuario', [
+    'uses' => 'Usuario@index'
+]);
+
 /*
  * Pagina Login
  */

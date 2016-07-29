@@ -23,6 +23,14 @@ Route::get('/usuario', [
     'uses' => 'Usuario@index'
 ]);
 
+Route::get('/usuario/{id}', [
+    'uses' => 'Usuario@show'
+]);
+
+Route::post('/usuario/{id}', [
+    'uses' => 'Usuario@destroy'
+]);
+
 /*
  * Pagina Login
  */

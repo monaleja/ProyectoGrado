@@ -60,4 +60,9 @@ class Persona extends Model
     public function eliminarPersona(){
         return $this->delete();
     }
+
+    public function getNombreCompleto()
+    {
+        return $this->persona_nombres." ".$this->persona_apellidos;
+    }
 }

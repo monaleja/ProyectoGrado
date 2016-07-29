@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\ORM\Usuario as user;
 
 class Usuario extends Controller
 {
@@ -15,6 +13,18 @@ class Usuario extends Controller
 
     public function index()
     {
-        return view("usuario");
+        $users = user::all();
+
+        return view("usuario",["usuarios"=>$users]);
+    }
+
+    public function show($id)
+    {
+
+    }
+
+    public function destroy($id)
+    {
+        return "OK";
     }
 }

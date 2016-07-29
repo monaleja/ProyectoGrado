@@ -52,4 +52,8 @@ class Usuario extends Authenticatable
     public function getRol(){
         return $this->belongsTo('App\ORM\Rol','rol_id','rol_id');
     }
+
+    public function getTipoUsuario(){
+        return $this->belongsTo('App\ORM\TipoUsuario','tipusu_id','tipusu_id');
+    }
 }

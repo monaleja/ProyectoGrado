@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 26-07-2016 a las 04:54:33
--- Versión del servidor: 10.1.13-MariaDB
--- Versión de PHP: 5.6.23
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 24-08-2016 a las 03:16:49
+-- Versión del servidor: 10.1.9-MariaDB
+-- Versión de PHP: 5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -55,22 +55,24 @@ INSERT INTO `tb_perrito` (`perrito_id`, `perrito_nombre`, `perrito_raza`, `perri
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `todo_califica`
+-- Estructura de tabla para la tabla `todo_agendainstructor`
 --
 
-CREATE TABLE `todo_califica` (
-  `califica_id` int(11) NOT NULL,
-  `sede_id` int(11) NOT NULL,
-  `matricula_id` int(11) NOT NULL,
-  `califica_fecha` datetime NOT NULL COMMENT 'Fecha Programacion del Examen',
-  `examen_id` int(11) NOT NULL COMMENT 'Codigo del Examen que Presento',
-  `califica_asistencia` char(1) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Presento el Examen',
-  `califica_buenas` int(4) DEFAULT NULL COMMENT 'Preguntas Respondidas Buenas',
-  `califica_malas` int(4) DEFAULT NULL COMMENT 'Preguntas Respondidas Malas',
-  `califica_ip` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Direccion IP Conexion Alumno',
-  `califica_entro` datetime DEFAULT NULL COMMENT 'Fecha Hora Entro a Presenta el Examen',
-  `califica_salio` datetime DEFAULT NULL COMMENT 'Fecha Hora Salida de Presentar el Examen',
-  `califica_aprobo` char(1) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Aprobado Si o No'
+CREATE TABLE `todo_agendainstructor` (
+  `ageins_id` int(11) NOT NULL,
+  `instructor_id` int(11) NOT NULL,
+  `alumno_id` int(11) NOT NULL,
+  `categoria_id` char(2) COLLATE utf8_unicode_ci NOT NULL,
+  `vehiculo_id` int(11) NOT NULL,
+  `examen_id` int(11) NOT NULL,
+  `ageins_fechaclase` date NOT NULL COMMENT 'Fecha en la que se debe cumplir la clase',
+  `ageins_horainicio` time NOT NULL COMMENT 'Hora a la que debe iniciar la clase',
+  `ageins_horafin` time NOT NULL COMMENT 'Hora a la que debe finalizar la clase',
+  `ageins_observacion` text COLLATE utf8_unicode_ci,
+  `ageins_fechacreacion` date NOT NULL COMMENT 'Fecha de creacion de la agenda',
+  `ageins_horacreacion` time NOT NULL COMMENT 'Hora de creacion de la agenda',
+  `ageins_fechamodificacion` date NOT NULL COMMENT 'Fecha de modificacion de la agenda',
+  `usuario_id` int(11) NOT NULL COMMENT 'Usuario creador de la agenda'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -9699,7 +9701,11 @@ CREATE TABLE `todo_evento` (
   `evento_fecha` date NOT NULL COMMENT 'Fecha del Examen',
   `evento_hora` time NOT NULL COMMENT 'Hora inicia Examen',
   `evento_clave` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Clave que se le Asigna al Alumno para Ingresar al Examen',
-  `evento_estado` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Activo-Cancelado-Presentado'
+  `evento_estado` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Activo-Cancelado-Presentado',
+  `evento_ip` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Numero de ip desde donde se presento el examen',
+  `evento_fechaingreso` datetime NOT NULL COMMENT 'Fecha y Hora del ingreso al examen',
+  `evento_fechafinalizo` datetime NOT NULL COMMENT 'Fecha y Hora de la finalizacion del examen',
+  `evento_examenaprobo` char(1) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Aprobado SI o NO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -9712,14 +9718,15 @@ CREATE TABLE `todo_examen` (
   `examen_id` int(11) NOT NULL COMMENT 'Codigo del examen',
   `sede_id` int(11) NOT NULL COMMENT 'Codigo de la sede',
   `categoria_id` char(8) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Codigo de la categoria',
-  `instructor_id` int(11) NOT NULL COMMENT 'Codigo el instructor',
+  `instructor_id` int(11) DEFAULT NULL COMMENT 'Codigo el instructor',
   `examen_tiempo` decimal(5,2) NOT NULL COMMENT 'Tiempo de duracion para cerrar el examen',
   `examen_numeropreguntas` int(4) DEFAULT NULL COMMENT 'Numero de preguntas del examen',
   `examen_aprobo` int(4) NOT NULL COMMENT 'Numero de respuestas verdaderas para aprobar el examen',
   `examen_noaprobo` int(4) DEFAULT NULL COMMENT 'Numero de respuestas falsas para no aprobar el examen',
   `examen_estado` char(1) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Abierto o Cerrado',
   `examen_fechacreacion` date NOT NULL COMMENT 'Fecha creacion del examen',
-  `usuario_id` int(11) NOT NULL COMMENT 'Usuario creador del examen'
+  `usuario_id` int(11) NOT NULL COMMENT 'Usuario creador del examen',
+  `examen_tipo` char(1) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Teorico (T) o Practico (P)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -9741,7 +9748,8 @@ CREATE TABLE `todo_itemexamen` (
 
 CREATE TABLE `todo_itempregunta` (
   `pregunta_id` int(11) NOT NULL,
-  `respuesta_id` int(11) NOT NULL
+  `opcres_id` int(11) NOT NULL,
+  `opcres_verdadera` char(1) DEFAULT NULL COMMENT 'Define si la opcion en cuestion es verdadera (1) o falsa (0)'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -9762,6 +9770,18 @@ CREATE TABLE `todo_matricula` (
   `matricula_fecha_final` date DEFAULT NULL COMMENT 'Fecha Finaliza Curso',
   `matricula_aprobo` char(1) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Aprobacion del Curso',
   `examen_id` int(11) DEFAULT NULL COMMENT 'Coonsecutivo del Examen Presentado'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `todo_opcionrespuesta`
+--
+
+CREATE TABLE `todo_opcionrespuesta` (
+  `opcres_id` int(11) NOT NULL,
+  `opcres_opcion` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Repuesta - 1',
+  `opcres_estado` char(1) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Activa o Cerrada'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -9805,7 +9825,9 @@ CREATE TABLE `todo_permiso` (
 
 INSERT INTO `todo_permiso` (`permiso_id`, `permiso_crear`, `permiso_modificar`, `permiso_consultar`, `permiso_eliminar`, `perfil_id`, `recurso_id`) VALUES
 (1, 1, 1, 1, 1, 1, 1),
-(2, 1, 1, 1, 1, 1, 2);
+(2, 1, 1, 1, 1, 1, 2),
+(3, 1, 1, 1, 1, 1, 3),
+(4, 1, 1, 1, 1, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -9881,25 +9903,36 @@ CREATE TABLE `todo_recurso` (
 --
 
 INSERT INTO `todo_recurso` (`recurso_id`, `recurso_nombre`, `recurso_modulo`, `recurso_ruta`) VALUES
-(1, 'USUARIO', 'USUARIO', '/usuario'),
-(2, 'EXAMEN', 'EXAMEN', '/examen');
+(1, 'FORMULARIO USUARIO', 'USUARIO', '/usuario'),
+(2, 'FORMULARIO EXAMEN', 'EXAMEN', '/examen'),
+(3, 'FORMULARIO MATRICULA', 'MATRICULA', '/matricula'),
+(4, 'FORMULARIO VEHICULO', 'VEHICULO', '/vehiculo');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `todo_respuesta`
+-- Estructura de tabla para la tabla `todo_reportevehiculo`
 --
 
-CREATE TABLE `todo_respuesta` (
-  `respuesta_id` int(11) NOT NULL,
-  `sede_id` int(11) NOT NULL,
-  `respuesta_opcion1` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Repuesta - 1',
-  `respuesta_opcion2` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Repuesta - 2',
-  `respuesta_opcion3` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Repuesta - 3',
-  `respuesta_opcion4` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Repuesta - 4',
-  `respuesta_opcion5` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Repuesta - 5',
-  `respuesta_verdadera` char(1) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Cual de las 5 es la verdadera',
-  `respuesta_estado` char(1) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Activa o Cerrada'
+CREATE TABLE `todo_reportevehiculo` (
+  `repveh_id` int(11) NOT NULL,
+  `ageins_id` int(11) NOT NULL,
+  `repveh_longitud` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `repveh_latitud` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `repveh_orientacion` varchar(20) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `todo_respuestaexamen`
+--
+
+CREATE TABLE `todo_respuestaexamen` (
+  `resexa_id` int(11) NOT NULL,
+  `examen_id` int(11) NOT NULL COMMENT 'Codigo del Examen que Presento',
+  `pregunta_id` int(11) NOT NULL COMMENT 'Codigo de la pregunta del examen',
+  `opcres_id` int(11) NOT NULL COMMENT 'Codigo de la opcion seleccionada'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -9911,15 +9944,16 @@ CREATE TABLE `todo_respuesta` (
 CREATE TABLE `todo_rol` (
   `rol_id` int(11) NOT NULL COMMENT 'Codigo del rol',
   `rol_nombre` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre del rol',
-  `perfil_id` int(11) NOT NULL COMMENT 'Codigo del perfil'
+  `perfil_id` int(11) NOT NULL COMMENT 'Codigo del perfil',
+  `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `todo_rol`
 --
 
-INSERT INTO `todo_rol` (`rol_id`, `rol_nombre`, `perfil_id`) VALUES
-(1, 'ADMIN', 1);
+INSERT INTO `todo_rol` (`rol_id`, `rol_nombre`, `perfil_id`, `usuario_id`) VALUES
+(1, 'ADMIN', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -10002,7 +10036,8 @@ CREATE TABLE `todo_tipousuario` (
 --
 
 INSERT INTO `todo_tipousuario` (`tipusu_id`, `tipusu_nombre`) VALUES
-(1, 'Administrador');
+(1, 'ADMINISTRADOR'),
+(2, 'ALUMNO');
 
 -- --------------------------------------------------------
 
@@ -10017,7 +10052,6 @@ CREATE TABLE `todo_usuario` (
   `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Clave del usuario',
   `usuario_fechaingreso` datetime NOT NULL COMMENT 'Fecha de ingreso',
   `usuario_estado` char(1) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Activo, Suspendido, Retirado',
-  `rol_id` int(11) NOT NULL COMMENT 'Codigo del rol',
   `persona_id` int(11) NOT NULL COMMENT 'Codigo de la persona',
   `remember_token` varchar(60) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -10026,8 +10060,8 @@ CREATE TABLE `todo_usuario` (
 -- Volcado de datos para la tabla `todo_usuario`
 --
 
-INSERT INTO `todo_usuario` (`usuario_id`, `tipusu_id`, `usuario_login`, `password`, `usuario_fechaingreso`, `usuario_estado`, `rol_id`, `persona_id`, `remember_token`) VALUES
-(1, 1, 'gomezjc', '$2y$10$0eZVIaqeV5Jd9KMb6OUGOesaLAml5VUJQ15vKuCkuWiJjvlRX/AyS', '2016-07-21 00:00:00', 'A', 1, 1, '5YdKgoD4XBjV8495N7BZZiyyWmoO3AIrakCCPAHkqzLhK6GMMvwOKbFrSMy2');
+INSERT INTO `todo_usuario` (`usuario_id`, `tipusu_id`, `usuario_login`, `password`, `usuario_fechaingreso`, `usuario_estado`, `persona_id`, `remember_token`) VALUES
+(1, 2, 'gomezjc', '$2y$10$0eZVIaqeV5Jd9KMb6OUGOesaLAml5VUJQ15vKuCkuWiJjvlRX/AyS', '2016-07-21 00:00:00', 'A', 1, 'cnylBbu8solQDEU86CvZySbcEbAs2nXPC8J0wYTcMX2H0yIwmNAmwqzzsVbS');
 
 -- --------------------------------------------------------
 
@@ -10070,13 +10104,15 @@ ALTER TABLE `tb_perrito`
   ADD PRIMARY KEY (`perrito_id`);
 
 --
--- Indices de la tabla `todo_califica`
+-- Indices de la tabla `todo_agendainstructor`
 --
-ALTER TABLE `todo_califica`
-  ADD PRIMARY KEY (`califica_id`),
-  ADD KEY `evalua_califica_ibfk_3` (`sede_id`),
-  ADD KEY `evalua_califica_ibfk_4` (`matricula_id`),
-  ADD KEY `evalua_califica_ibfk_1` (`examen_id`) USING BTREE;
+ALTER TABLE `todo_agendainstructor`
+  ADD PRIMARY KEY (`ageins_id`),
+  ADD KEY `instructor_id` (`instructor_id`),
+  ADD KEY `alumno_id` (`alumno_id`),
+  ADD KEY `categoria_id` (`categoria_id`),
+  ADD KEY `vehiculo_id` (`vehiculo_id`),
+  ADD KEY `examen_id` (`examen_id`);
 
 --
 -- Indices de la tabla `todo_categoria`
@@ -10157,9 +10193,9 @@ ALTER TABLE `todo_itemexamen`
 -- Indices de la tabla `todo_itempregunta`
 --
 ALTER TABLE `todo_itempregunta`
-  ADD PRIMARY KEY (`pregunta_id`,`respuesta_id`),
-  ADD UNIQUE KEY `pregunta_id` (`pregunta_id`,`respuesta_id`),
-  ADD KEY `respuesta_id` (`respuesta_id`);
+  ADD PRIMARY KEY (`pregunta_id`,`opcres_id`),
+  ADD UNIQUE KEY `pregunta_id` (`pregunta_id`) USING BTREE,
+  ADD KEY `opcres_id` (`opcres_id`) USING BTREE;
 
 --
 -- Indices de la tabla `todo_matricula`
@@ -10170,6 +10206,12 @@ ALTER TABLE `todo_matricula`
   ADD KEY `idx_matriculas_categoria` (`categoria_id`),
   ADD KEY `todo_matriculas_ibfk_2` (`sede_id`),
   ADD KEY `todo_matricula_ibfk_1` (`examen_id`);
+
+--
+-- Indices de la tabla `todo_opcionrespuesta`
+--
+ALTER TABLE `todo_opcionrespuesta`
+  ADD PRIMARY KEY (`opcres_id`);
 
 --
 -- Indices de la tabla `todo_perfil`
@@ -10213,18 +10255,28 @@ ALTER TABLE `todo_recurso`
   ADD PRIMARY KEY (`recurso_id`);
 
 --
--- Indices de la tabla `todo_respuesta`
+-- Indices de la tabla `todo_reportevehiculo`
 --
-ALTER TABLE `todo_respuesta`
-  ADD PRIMARY KEY (`respuesta_id`),
-  ADD KEY `evalua_preguntas_ibfk_2` (`sede_id`);
+ALTER TABLE `todo_reportevehiculo`
+  ADD PRIMARY KEY (`repveh_id`),
+  ADD KEY `ageins_id` (`ageins_id`);
+
+--
+-- Indices de la tabla `todo_respuestaexamen`
+--
+ALTER TABLE `todo_respuestaexamen`
+  ADD PRIMARY KEY (`resexa_id`),
+  ADD KEY `pregunta_id` (`pregunta_id`),
+  ADD KEY `opcres_id` (`opcres_id`),
+  ADD KEY `examen_id` (`examen_id`) USING BTREE;
 
 --
 -- Indices de la tabla `todo_rol`
 --
 ALTER TABLE `todo_rol`
   ADD PRIMARY KEY (`rol_id`),
-  ADD KEY `perfil_id` (`perfil_id`);
+  ADD KEY `perfil_id` (`perfil_id`),
+  ADD KEY `usuario_id` (`usuario_id`);
 
 --
 -- Indices de la tabla `todo_sede`
@@ -10263,7 +10315,6 @@ ALTER TABLE `todo_tipousuario`
 ALTER TABLE `todo_usuario`
   ADD PRIMARY KEY (`usuario_id`),
   ADD KEY `tipusu_id` (`tipusu_id`),
-  ADD KEY `rol_id` (`rol_id`),
   ADD KEY `persona_id` (`persona_id`);
 
 --
@@ -10283,10 +10334,10 @@ ALTER TABLE `todo_vehiculo`
 ALTER TABLE `tb_perrito`
   MODIFY `perrito_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
--- AUTO_INCREMENT de la tabla `todo_califica`
+-- AUTO_INCREMENT de la tabla `todo_agendainstructor`
 --
-ALTER TABLE `todo_califica`
-  MODIFY `califica_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `todo_agendainstructor`
+  MODIFY `ageins_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `todo_diario`
 --
@@ -10328,6 +10379,11 @@ ALTER TABLE `todo_examen`
 ALTER TABLE `todo_matricula`
   MODIFY `matricula_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Consecutivo';
 --
+-- AUTO_INCREMENT de la tabla `todo_opcionrespuesta`
+--
+ALTER TABLE `todo_opcionrespuesta`
+  MODIFY `opcres_id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `todo_perfil`
 --
 ALTER TABLE `todo_perfil`
@@ -10336,7 +10392,7 @@ ALTER TABLE `todo_perfil`
 -- AUTO_INCREMENT de la tabla `todo_permiso`
 --
 ALTER TABLE `todo_permiso`
-  MODIFY `permiso_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo del permiso', AUTO_INCREMENT=3;
+  MODIFY `permiso_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo del permiso', AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `todo_persona`
 --
@@ -10351,12 +10407,17 @@ ALTER TABLE `todo_pregunta`
 -- AUTO_INCREMENT de la tabla `todo_recurso`
 --
 ALTER TABLE `todo_recurso`
-  MODIFY `recurso_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la pagina', AUTO_INCREMENT=3;
+  MODIFY `recurso_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la pagina', AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT de la tabla `todo_respuesta`
+-- AUTO_INCREMENT de la tabla `todo_reportevehiculo`
 --
-ALTER TABLE `todo_respuesta`
-  MODIFY `respuesta_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `todo_reportevehiculo`
+  MODIFY `repveh_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `todo_respuestaexamen`
+--
+ALTER TABLE `todo_respuestaexamen`
+  MODIFY `resexa_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `todo_rol`
 --
@@ -10381,7 +10442,7 @@ ALTER TABLE `todo_tesoreria`
 -- AUTO_INCREMENT de la tabla `todo_tipousuario`
 --
 ALTER TABLE `todo_tipousuario`
-  MODIFY `tipusu_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo usuario', AUTO_INCREMENT=2;
+  MODIFY `tipusu_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo usuario', AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `todo_usuario`
 --
@@ -10397,11 +10458,14 @@ ALTER TABLE `todo_vehiculo`
 --
 
 --
--- Filtros para la tabla `todo_califica`
+-- Filtros para la tabla `todo_agendainstructor`
 --
-ALTER TABLE `todo_califica`
-  ADD CONSTRAINT `todo_califica_ibfk_3` FOREIGN KEY (`sede_id`) REFERENCES `todo_sede` (`sede_id`),
-  ADD CONSTRAINT `todo_califica_ibfk_4` FOREIGN KEY (`matricula_id`) REFERENCES `todo_matricula` (`matricula_id`);
+ALTER TABLE `todo_agendainstructor`
+  ADD CONSTRAINT `todo_agendainstructor_ibfk_1` FOREIGN KEY (`instructor_id`) REFERENCES `todo_usuario` (`usuario_id`),
+  ADD CONSTRAINT `todo_agendainstructor_ibfk_2` FOREIGN KEY (`alumno_id`) REFERENCES `todo_usuario` (`usuario_id`),
+  ADD CONSTRAINT `todo_agendainstructor_ibfk_3` FOREIGN KEY (`categoria_id`) REFERENCES `todo_categoria` (`categoria_id`),
+  ADD CONSTRAINT `todo_agendainstructor_ibfk_4` FOREIGN KEY (`vehiculo_id`) REFERENCES `todo_vehiculo` (`vehiculo_id`),
+  ADD CONSTRAINT `todo_agendainstructor_ibfk_5` FOREIGN KEY (`examen_id`) REFERENCES `todo_examen` (`examen_id`);
 
 --
 -- Filtros para la tabla `todo_diario`
@@ -10448,7 +10512,7 @@ ALTER TABLE `todo_itemexamen`
 --
 ALTER TABLE `todo_itempregunta`
   ADD CONSTRAINT `todo_itempregunta_ibfk_1` FOREIGN KEY (`pregunta_id`) REFERENCES `todo_pregunta` (`pregunta_id`),
-  ADD CONSTRAINT `todo_itempregunta_ibfk_2` FOREIGN KEY (`respuesta_id`) REFERENCES `todo_respuesta` (`respuesta_id`);
+  ADD CONSTRAINT `todo_itempregunta_ibfk_2` FOREIGN KEY (`opcres_id`) REFERENCES `todo_opcionrespuesta` (`opcres_id`);
 
 --
 -- Filtros para la tabla `todo_matricula`
@@ -10486,16 +10550,24 @@ ALTER TABLE `todo_pregunta`
   ADD CONSTRAINT `todo_pregunta_ibfk_2` FOREIGN KEY (`categoria_id`) REFERENCES `todo_categoria` (`categoria_id`);
 
 --
--- Filtros para la tabla `todo_respuesta`
+-- Filtros para la tabla `todo_reportevehiculo`
 --
-ALTER TABLE `todo_respuesta`
-  ADD CONSTRAINT `todo_respuesta_ibfk_2` FOREIGN KEY (`sede_id`) REFERENCES `todo_sede` (`sede_id`);
+ALTER TABLE `todo_reportevehiculo`
+  ADD CONSTRAINT `todo_reportevehiculo_ibfk_1` FOREIGN KEY (`ageins_id`) REFERENCES `todo_agendainstructor` (`ageins_id`);
+
+--
+-- Filtros para la tabla `todo_respuestaexamen`
+--
+ALTER TABLE `todo_respuestaexamen`
+  ADD CONSTRAINT `todo_respuestaexamen_ibfk_1` FOREIGN KEY (`pregunta_id`) REFERENCES `todo_pregunta` (`pregunta_id`),
+  ADD CONSTRAINT `todo_respuestaexamen_ibfk_2` FOREIGN KEY (`opcres_id`) REFERENCES `todo_opcionrespuesta` (`opcres_id`);
 
 --
 -- Filtros para la tabla `todo_rol`
 --
 ALTER TABLE `todo_rol`
-  ADD CONSTRAINT `todo_rol_ibfk_1` FOREIGN KEY (`perfil_id`) REFERENCES `todo_perfil` (`perfil_id`);
+  ADD CONSTRAINT `todo_rol_ibfk_1` FOREIGN KEY (`perfil_id`) REFERENCES `todo_perfil` (`perfil_id`),
+  ADD CONSTRAINT `todo_rol_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `todo_usuario` (`usuario_id`);
 
 --
 -- Filtros para la tabla `todo_sede`
@@ -10524,7 +10596,6 @@ ALTER TABLE `todo_tesoreria`
 --
 ALTER TABLE `todo_usuario`
   ADD CONSTRAINT `todo_usuario_ibfk_1` FOREIGN KEY (`tipusu_id`) REFERENCES `todo_tipousuario` (`tipusu_id`),
-  ADD CONSTRAINT `todo_usuario_ibfk_2` FOREIGN KEY (`rol_id`) REFERENCES `todo_rol` (`rol_id`),
   ADD CONSTRAINT `todo_usuario_ibfk_3` FOREIGN KEY (`persona_id`) REFERENCES `todo_persona` (`persona_id`);
 
 --

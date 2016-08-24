@@ -4,10 +4,10 @@ namespace App\ORM;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ItemPregunta extends Model
+class OpcionRespuesta extends Model
 {
-    protected $table = "todo_itempregunta";
-    protected $primaryKey = array('pregunta_id','opcres_id');
+    protected $table = "todo_opcionrespuesta";
+    protected $primaryKey = "opcres_id";
     public $timestamps = false;
 
     /**
@@ -18,10 +18,9 @@ class ItemPregunta extends Model
      * @fecha: 2016-05-07
      * @return bool
      */
-    public function crearItemPregunta(Object $objeto,$edicion){
-        $this->pregunta_id(trim($objeto->getPreguntaId()));
-        $this->opcres_id(trim($objeto->getOpcresId()));
-        $this->opcres_verdadera(trim($objeto->getOpcresVerdadera()));
+    public function crearRespuesta(Object $objeto,$edicion){
+        $this->opcres_opcion(strtoupper(trim($objeto->getOpcresOpcion())));
+        $this->opcres_estado(strtoupper(trim($objeto->getOpcresEstado())));
         return $this->save();
     }
 
@@ -32,7 +31,7 @@ class ItemPregunta extends Model
      * @autor: Alejandra
      * @fecha: 2016-05-07
      */
-    public function eliminarItemPregunta(){
+    public function eliminarRespuesta(){
         return $this->delete();
     }
 }

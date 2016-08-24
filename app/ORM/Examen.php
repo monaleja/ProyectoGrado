@@ -31,6 +31,7 @@ class Examen extends Model
         $this->examen_estado(trim($objeto->getExamenEstado()));
         $this->examen_fechacreacion($date->format('Y-m-d'));
         $this->usuario_id(trim($objeto->getUsuarioId()));
+        $this->examen_tipo(trim($objeto->getExmanenTipo()));
         return $this->save();
     }
 

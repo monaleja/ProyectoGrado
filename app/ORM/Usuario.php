@@ -24,7 +24,6 @@ class Usuario extends Authenticatable
         $this->tipusu_id(trim($objeto->getTipusuId()));
         $this->password(trim(md5($objeto->getPassword())));
         $this->usuario_estado(strtoupper(trim($objeto->getUsuarioEstado())));
-        $this->rol_id(trim($objeto->getRolId()));
 
         if(!$edicion){
             $this->usuario_login(strtoupper(trim($objeto->getUsuarioLogin())));

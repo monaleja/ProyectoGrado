@@ -21,6 +21,7 @@ class Rol extends Model
     public function crearRol(Object $objeto,$edicion){
         $this->rol_nombre(strtoupper(trim($objeto->getRolNombre())));
         $this->perfil_id(trim($objeto->getPerfilId()));
+        $this->usuario_id(trim($objeto->getUsuarioId()));
         return $this->save();
     }
 

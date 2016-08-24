@@ -20,6 +20,10 @@ class Evento extends Model
      */
     public function crearEvento(Object $objeto,$edicion){
         $this->evento_estado(trim($objeto->getEventoEstado()));
+        $this->evento_ip(trim($objeto->getEventoIp()));
+        $this->evento_fechaingreso(trim($objeto->getEventoFechaingreso()));
+        $this->evento_fechafinalizo(trim($objeto->getEventoFechafinalizo()));
+        $this->evento_examenaprobo(trim($objeto->getEventoExamenaprobo()));
 
         if(!$edicion){
             $this->sede_id(trim($objeto->getSedeId()));

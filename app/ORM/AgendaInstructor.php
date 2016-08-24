@@ -26,7 +26,6 @@ class AgendaInstructor extends Model
         $this->categoria_id(trim($objeto->getCategoriaId()));
         $this->vehiculo_id(trim($objeto->getVehiculoId()));
         $this->examen_id(trim($objeto->getExamenId()));
-        $this->examen_id(trim($objeto->getExamenId()));
         $this->ageins_fechaclase(trim($objeto->getAgeinsFechaclase()));
         $this->ageins_horainicio(trim($objeto->getAgeinsHorainicio()));
         $this->ageins_horafin(trim($objeto->getAgeinsHorafin()));

@@ -35,4 +35,12 @@ class Ciudad extends Model
     public function eliminarCiudad(){
         return $this->delete();
     }
+    
+    public function getCiudadAutocomplete()
+    {
+        return json_encode([
+            ["value"=>"Yumbo","id"=>"1"],
+            ["value"=>"Chancos","id"=>"2"]
+        ]);
+    }
 }

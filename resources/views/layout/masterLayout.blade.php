@@ -15,6 +15,11 @@
     {!! Html::style('assets/css/font-awesome.min.css') !!}
     <!-- Custom Theme Style -->
     {!! Html::style('assets/css/custom.css') !!}
+    <!-- Date Picker -->
+    {!! Html::style('assets/css/bootstrap-datepicker.min.css') !!}
+    <!-- Autocomplete -->
+    {!! Html::style('assets/css/jquery.autocomplete.css') !!}
+
 </head>
 
 <body class="nav-md">
@@ -25,7 +30,7 @@
                 <div class="navbar nav_title" style="border: 0;">
                     <a href="/home" class="site_title">
                         <i class="fa fa-car"></i>
-                        <span>Conductores 2.0</span>
+                        <span>Conductor 2.0</span>
                     </a>
                 </div>
                 <div class="clearfix"></div>
@@ -108,7 +113,7 @@
 
                 <div class="row">
 
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-20 col-sm-20 col-xs-20">
                         @yield("content")
                     </div>
                 </div>
@@ -137,5 +142,14 @@
 {!! Html::script('assets/js/nprogress.js') !!}
 <!-- Custom Theme Scripts -->
 {!! Html::script('assets/js/custom.min.js') !!}
+<!-- Date Picker -->
+{!! Html::script('assets/js/bootstrap-datepicker.min.js') !!}
+<!-- Autocomplete -->
+{!! Html::script('assets/js/jquery.autocomplete.js') !!}
+
+{!! Html::script('assets/js/jquery.autocomplete.min.js') !!}
+
+{!! Html::script('assets/js/scriptAdicionales.js') !!}
+
 </body>
 </html>

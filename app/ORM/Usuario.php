@@ -50,6 +50,6 @@ class Usuario extends Authenticatable
     }
 
     public function getRol(){
-        return $this->belongsTo('App\ORM\Rol','rol_id','rol_id');
+        return $this->belongsTo('App\ORM\Rol','usuario_id','usuario_id');
     }
 }

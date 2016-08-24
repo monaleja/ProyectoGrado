@@ -18,9 +18,25 @@ Route::get('/', [
 
 /* Modulo Usuario
  * */
-
 Route::get('/usuario', [
     'uses' => 'Usuario@index'
+]);
+
+Route::get('/autocomplete',[
+    'uses'=>'Usuario@autocomplete',
+    'as'=>'autocomplete'
+]);
+
+/* Modulo Matrícula
+* */
+Route::get('/matricula', [
+    'uses' => 'Matricula@index'
+]);
+
+/* Modulo Vehículo
+* */
+Route::get('/vehiculo', [
+    'uses' => 'Vehiculo@index'
 ]);
 
 /*

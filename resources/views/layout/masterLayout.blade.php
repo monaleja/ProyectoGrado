@@ -108,6 +108,7 @@
                     <div class="title_left">
                         <h3>@yield('tittlePage')</h3>
                     </div>
+
                 </div>
                 <div class="clearfix"></div>
 
@@ -149,7 +150,22 @@
 
 {!! Html::script('assets/js/jquery.autocomplete.min.js') !!}
 
-{!! Html::script('assets/js/scriptAdicionales.js') !!}
+{!! Html::script('assets/js/datatables.net/js/jquery.dataTables.min.js') !!}
+{!! Html::script("assets/js/datatables.net-bs/js/dataTables.bootstrap.min.js") !!}
+{!! Html::script("assets/js/datatables.net-buttons/js/dataTables.buttons.min.js") !!}
+{!! Html::script("assets/js/datatables.net-buttons-bs/js/buttons.bootstrap.min.js") !!}
+{!! Html::script("assets/js/datatables.net-buttons/js/buttons.flash.min.js") !!}
+{!! Html::script("assets/js/datatables.net-buttons/js/buttons.html5.min.js") !!}
+{!! Html::script("assets/js/datatables.net-buttons/js/buttons.print.min.js") !!}
+{!! Html::script("assets/js/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js") !!}
+{!! Html::script("assets/js/datatables.net-keytable/js/dataTables.keyTable.min.js") !!}
+{!! Html::script("assets/js/datatables.net-responsive/js/dataTables.responsive.min.js") !!}
+{!! Html::script("assets/js/datatables.net-responsive-bs/js/responsive.bootstrap.js") !!}
+{!! Html::script("assets/js/datatables.net-scroller/js/dataTables.scroller.min.js") !!}
+
+{!! Html::script("assets/js/scriptAdicionales.js") !!}
+
+@yield("scriptsAdicionales")
 
 </body>
 </html>

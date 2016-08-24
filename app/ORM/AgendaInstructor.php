@@ -36,6 +36,7 @@ class AgendaInstructor extends Model
             $this->ageins_fechacreacion(trim($objeto->getAgeinsFechacreacion()));
             $this->ageins_horacreacion(trim($objeto->getAgeinsHoraCreacion()));
             $this->usuario_id(trim($objeto->getUsuarioId()));
+            
         }
     }
 

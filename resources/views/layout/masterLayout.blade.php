@@ -20,6 +20,8 @@
     <!-- Autocomplete -->
     {!! Html::style('assets/css/jquery.autocomplete.css') !!}
 
+    {!! Html::style('assets/css/jquery-ui.min.css') !!}
+
 </head>
 
 <body class="nav-md">
@@ -28,7 +30,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="/home" class="site_title">
+                    <a href="/" class="site_title">
                         <i class="fa fa-car"></i>
                         <span>Conductor 2.0</span>
                     </a>
@@ -82,7 +84,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="assets/images/img.jpg" alt="">
+                                <img src="/assets/images/img.jpg" alt="">
                                     {{$data['nombreUsuario']}}
                                 <span class=" fa fa-angle-down"></span>
                             </a>
@@ -114,7 +116,7 @@
 
                 <div class="row">
 
-                    <div class="col-md-20 col-sm-20 col-xs-20">
+                    <div class="col-md-20 col-sm-20 col-xs-20" style="height:100%;">
                         @yield("content")
                     </div>
                 </div>
@@ -146,7 +148,8 @@
 <!-- Date Picker -->
 {!! Html::script('assets/js/bootstrap-datepicker.min.js') !!}
 <!-- Autocomplete -->
-{!! Html::script('assets/js/jquery.autocomplete.js') !!}
+
+{!! Html::script('assets/js/jquery-ui.min.js') !!}
 
 {!! Html::script('assets/js/jquery.autocomplete.min.js') !!}
 

@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="x_panel" style="height:600px;">
+    <div class="x_panel" style="height:100%;position:relative;">
 
         <div class="x_title">
             <h2>Datos Basicos</h2>
@@ -49,7 +49,10 @@
                 </tbody>
             </table>
         </div>
-        <button type="button" class="btn btn-primary">Crear</button>
+        {!! link_to_action('Usuario@create',
+                                    $title = "Crear",
+                                    [],
+                                    $attributes = ["class"=>"btn btn-default btn-primary"])!!}
     </div>
 
 @endsection

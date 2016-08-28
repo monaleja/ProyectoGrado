@@ -23,6 +23,11 @@ class Usuario extends Controller
     public function index()
     {
         $users = user::all();
+        return view("usuario",["usuarios"=>$users]);
+    }
+
+    public function create()
+    {
         $ciudad = Ciudad::all();
         $eps = Eps::all();
         $etnia = Etnia::all();
@@ -32,9 +37,14 @@ class Usuario extends Controller
         $rol = Rol::all();
         $autocomplete = $ciudad[0]->getCiudadAutocomplete();
 
-        return view("usuario",["usuarios"=>$users,"ciudad"=>$ciudad,"eps"=>$eps,"etnia"=>$etnia,"sede"=>$sede,
-                               "discapacidad"=>$discapacidad,"tipoUsuario"=>$tipoUsuario,"rol"=>$rol,
-                               "autocomplete"=>$autocomplete]);
+        return view("crearusuario",["ciudad"=>$ciudad,"eps"=>$eps,"etnia"=>$etnia,"sede"=>$sede,
+            "discapacidad"=>$discapacidad,"tipoUsuario"=>$tipoUsuario,"rol"=>$rol,
+            "autocomplete"=>$autocomplete]);
+    }
+
+    public function store()
+    {
+
     }
 
     public function show($id)

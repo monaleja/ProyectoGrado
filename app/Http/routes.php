@@ -22,10 +22,30 @@ Route::get('/usuario', [
     'uses' => 'Usuario@index'
 ]);
 
+Route::get('/usuario/editar/{id}', [
+    'uses' => 'Usuario@show'
+]);
+
+Route::post('/usuario/eliminar/{id}', [
+    'uses' => 'Usuario@destroy'
+]);
+
+Route::get('/usuario/crear', [
+    'uses' => 'Usuario@create'
+]);
+
+Route::post('/usuario/crear', [
+    'uses' => 'Usuario@store'
+]);
+
 /* Modulo Matrícula
 * */
 Route::get('/matricula', [
     'uses' => 'Matricula@index'
+]);
+
+Route::post('/matricula/crear', [
+    'uses' => 'Matricula@store'
 ]);
 
 /* Modulo Vehículo
@@ -34,12 +54,8 @@ Route::get('/vehiculo', [
     'uses' => 'Vehiculo@index'
 ]);
 
-Route::get('/usuario/{id}', [
-    'uses' => 'Usuario@show'
-]);
-
-Route::post('/usuario/{id}', [
-    'uses' => 'Usuario@destroy'
+Route::post('/vehiculo/crear', [
+    'uses' => 'Vehiculo@store'
 ]);
 
 /*

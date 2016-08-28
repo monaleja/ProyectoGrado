@@ -17,4 +17,9 @@ class Vehiculo extends Controller
         
         return view("vehiculo",["vehiculo"=>$vehiculo,"sede"=>$sede]);        
     }
+
+    public function store()
+    {
+
+    }
 }

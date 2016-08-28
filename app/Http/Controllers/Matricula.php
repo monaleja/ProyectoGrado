@@ -34,4 +34,9 @@ class Matricula extends Controller
     {
         return "OK";
     }
+
+    public function store()
+    {
+
+    }
 }

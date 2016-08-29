@@ -56,4 +56,15 @@ class Usuario extends Controller
     {
         return "OK";
     }
+
+    public function cargarImagen(Request $request)
+    {
+        $img = explode('data',$request);
+        $pos  = strpos($img[1], ';');
+        $type = explode("/",explode(':', substr($img[1], 0, $pos))[1]);
+        $base64 = preg_replace('#^:image/\w+;base64,#i', '', $img[1]);
+        $data = base64_decode($base64);
+        $success = file_put_contents("images/perrito.".$type[1], $data);
+        return $success ? "OK" : "Error";
+    }
 }

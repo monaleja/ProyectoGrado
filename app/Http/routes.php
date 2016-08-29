@@ -38,6 +38,10 @@ Route::post('/usuario/crear', [
     'uses' => 'Usuario@store'
 ]);
 
+Route::post('/usuario/loadImage', [
+    'uses' => 'Usuario@cargarImagen'
+]);
+
 /* Modulo Matrícula
 * */
 Route::get('/matricula', [

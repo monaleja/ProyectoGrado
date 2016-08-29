@@ -22,6 +22,8 @@
 
     {!! Html::style('assets/css/jquery-ui.min.css') !!}
 
+    {!! Html::style('assets/css/uploadFile.css') !!}
+
 </head>
 
 <body class="nav-md">

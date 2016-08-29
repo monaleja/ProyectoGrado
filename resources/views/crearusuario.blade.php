@@ -12,6 +12,17 @@
         </div>
 
         <div class="x_content">
+
+            <div class="form-group">
+                <div class="col-md-12" style="text-align: center;">
+                    @include("partials.search.cargarImagen")
+                    <div id="getval">
+                        <input id="image" type="file">
+                        <i id="icon" class="fa fa-user-plus fa-5x" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+
             {!! Form::open(array("action"=>"Usuario@store","method"=>"post","class"=>"form-horizontal")) !!}
             <div class="form-group">
                 <div class="col-md-4">
@@ -138,9 +149,9 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                        <label for="persona_email">Email</label>
-                        {!! Form::text('persona_email',null,['class'=>'form-control','placeholder'=>'Email','required'=>'required']) !!}
-                    </div>
+                    <label for="persona_email">Email</label>
+                    {!! Form::text('persona_email',null,['class'=>'form-control','placeholder'=>'Email','required'=>'required']) !!}
+                </div>
             </div>
 
             <br>
@@ -181,10 +192,13 @@
 
 @section('scriptsAdicionales')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("#ac33333").autocomplete({
                 data: {!! ($autocomplete) !!}
             });
         });
     </script>
+
+    {!! Html::script("assets/js/ajax/uploadFile.js") !!}
+
 @endsection

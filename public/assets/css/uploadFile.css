@@ -1,0 +1,27 @@
+#getval{
+    background-size:cover;
+    background-position: center;
+    height: 150px; width: 150px;
+    border: 2px dashed #C8CBCE;
+    display: inline-block;
+    text-align:center;
+}
+
+#icon{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+    margin-top: 0.5em;
+}
+
+#image{
+    opacity: 0.0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height:100%;
+}
